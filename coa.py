@@ -1,3 +1,4 @@
+# Implementation of Coyote Optimization Algorithm
 import numpy as np
 
 def COA(lu, iterMax, FOBJ):
@@ -6,7 +7,7 @@ def COA(lu, iterMax, FOBJ):
     VarMin = lu[0]
     VarMax = lu[1]
     nPacks = 10     # Must be at least 2
-    nCoy = 3        # Must be at least 3
+    nCoy = 5        # Must be at least 3
     nPop = nPacks * nCoy
 
     # Probability of leaving a pack

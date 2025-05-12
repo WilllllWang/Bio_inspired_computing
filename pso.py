@@ -1,9 +1,10 @@
+# Implementation of Adaptive Weight Particle Swarm Optimization
 import numpy as np
 
 
 def AWPSO(lu, iterMax, FOBJ):
     # Parameters
-    nPop = 30
+    nPop = 50
     wMax = 0.9
     wMin = 0.4
     D = lu.shape[1]
