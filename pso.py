@@ -12,8 +12,8 @@ def AWPSO(lu, iterMax, FOBJ):
     VarMax = lu[1]
     Vmax = 0.2 * (VarMax - VarMin)
     Vmin = -Vmax
-    search_range = VarMax[0] - VarMin[0]
-    a = 0.000035 * search_range  # steepness parameter for sigmoid function
+    searchSpace = VarMax[0] - VarMin[0]
+    a = 0.000035 * searchSpace  # steepness parameter for sigmoid function
 
     # Initialize particle positions and velocities
     positions = VarMin + np.random.rand(nPop, D) * (VarMax - VarMin)
