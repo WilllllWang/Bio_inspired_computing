@@ -4,7 +4,7 @@ import numpy as np
 
 def AWPSO(lu, iterMax, FOBJ, target):
     # Parameters
-    nPop = 50
+    nPop = 70
     wMax = 0.9
     wMin = 0.4
     D = lu.shape[1]

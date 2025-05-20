@@ -4,7 +4,7 @@ from numba import njit
 
 def MVCGA(lu, iterMax, FOBJ, target):
     # Parameters
-    nPop = 50
+    nPop = 70
     pcMin = 0.5                 # Crossover probability lower bound
     pcMax = 0.8                 # Crossover probability upper bound
     pmMin = 0.001               # Mutation probability lower bound
@@ -54,7 +54,7 @@ def MVCGA(lu, iterMax, FOBJ, target):
                 sigmoid = 1 / (1 + safe_exp(-iter) + 1e-12) 
                 numerator = fPair - fAvgPop
                 denominator = fMax - fAvgPop + 1e-12 
-                pcPair = pcMin - ((pcMax - pcMin) / (sigmoid + 1e-12)) * (numerator / denominator)
+                pcPair = max(0, pcMin - ((pcMax - pcMin) / (sigmoid + 1e-12)) * (numerator / denominator))
 
             if np.random.rand() < pcPair:
                 crossAlpha = np.random.rand()
@@ -81,7 +81,7 @@ def MVCGA(lu, iterMax, FOBJ, target):
                 numerator = fi - fAvgPop
                 denominator = fMax - fAvgPop + 1e-12
                 sigmoid = 1 / (1 + safe_exp(iter) + 1e-12)
-                pmInd = pmMax - ((pmMax - pmMin) / (sigmoid + 1e-12)) * (numerator / denominator)
+                pmInd = max(0, pmMax - ((pmMax - pmMin) / (sigmoid + 1e-12)) * (numerator / denominator))
 
             if np.random.rand() < pmInd:
                 mutation = (varMax - varMin) * (np.random.rand(d) - 0.5)
@@ -119,7 +119,7 @@ def MVCGA(lu, iterMax, FOBJ, target):
 
 def rouletteWheelSelection(fitness):
     fitnessInv = 1 / (fitness + 1e-12)
-    probs = fitnessInv / np.sum(fitnessInv)  
+    probs = fitnessInv / np.sum(fitnessInv)
     return np.random.choice(len(fitness), p=probs)
 
 

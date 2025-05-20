@@ -6,7 +6,7 @@ def COA(lu, iterMax, FOBJ, target):
     D = lu.shape[1]
     VarMin = lu[0]
     VarMax = lu[1]
-    nPacks = 10     # Must be at least 2
+    nPacks = 14     # Must be at least 2
     nCoy = 5        # Must be at least 3
     nPop = nPacks * nCoy
 
