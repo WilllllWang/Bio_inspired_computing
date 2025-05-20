@@ -9,9 +9,10 @@ from ga import MVCGA
 
 def main():
     # Algorithm
-    # exper(AWPSO)
+    exper(AWPSO)
+    # exper(MVCGA)
     # exper(COA)
-    exper(MVCGA)
+    
 
 
 def exper(META):
@@ -22,11 +23,13 @@ def exper(META):
     # lu = np.zeros((2, d))   # Boundaires
     # lu[0, :] = -5.12        # Lower boundaires
     # lu[1, :] = 5.12         # Upper boundaries
+    # target = 0.0            # Global Optimum
 
     FOBJ = schwefel_226     # Function
     lu = np.zeros((2, d))   # Boundaires
     lu[0, :] = -500         # Lower boundaires
     lu[1, :] = 500          # Upper boundaries
+    target = 0.0            # Global Optimum
 
     # Experimanetal variables
     iterMax = 5000          # Number of iterations
@@ -36,7 +39,7 @@ def exper(META):
     opIts = np.full(nExp, iterMax)
     success = 0
     for i in range(nExp):
-        globalBest, globalBestParams, globalBestPerIter, optimumIter = META(lu, iterMax, FOBJ)
+        globalBest, globalBestParams, globalBestPerIter, optimumIter = META(lu, iterMax, FOBJ, target)
         gBests[i] = globalBest
         if optimumIter > -1: opIts[i] = optimumIter
         if gBests[i] < 1e-6: success += 1

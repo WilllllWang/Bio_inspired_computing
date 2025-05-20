@@ -1,7 +1,7 @@
 # Implementation of Coyote Optimization Algorithm
 import numpy as np
 
-def COA(lu, iterMax, FOBJ):
+def COA(lu, iterMax, FOBJ, target):
     # Optimization problem variables
     D = lu.shape[1]
     VarMin = lu[0]
@@ -117,7 +117,9 @@ def COA(lu, iterMax, FOBJ):
         globalBest = costs[bestIdx]
         globalBestParams = coyotes[bestIdx]
         globalBestPerIter[iter] = globalBest
-        if globalBest == 0 and optimumIter == -1: optimumIter = iter
+        if globalBest == target and optimumIter == -1: 
+            optimumIter = iter
+            break
 
     return globalBest, globalBestParams, globalBestPerIter, optimumIter
 
@@ -132,5 +134,6 @@ if __name__ == "__main__":
     lu[0, :] = -1       
     lu[1, :] = 1
     iterMax = 1000
-    arg = COA(lu, iterMax, FOBJ)
+    target = 0.0
+    arg = COA(lu, iterMax, FOBJ, target)
     print(arg[3])

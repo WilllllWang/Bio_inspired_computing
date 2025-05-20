@@ -2,7 +2,7 @@
 import numpy as np
 
 
-def AWPSO(lu, iterMax, FOBJ):
+def AWPSO(lu, iterMax, FOBJ, target):
     # Parameters
     nPop = 50
     wMax = 0.9
@@ -72,7 +72,9 @@ def AWPSO(lu, iterMax, FOBJ):
             
 
         globalBestPerIter[iter] = globalBest
-        if globalBest == 0.0 and optimumIter == -1: optimumIter = iter
+        if globalBest == target and optimumIter == -1: 
+            optimumIter = iter
+            break
 
     return globalBest, globalBestParams, globalBestPerIter, optimumIter
 
@@ -157,7 +159,8 @@ if __name__ == "__main__":
     lu[0, :] = -1       
     lu[1, :] = 1
     iterMax = 10
-    AWPSO(lu, iterMax, FOBJ)
+    target = 0.0
+    AWPSO(lu, iterMax, FOBJ, target)
 
 
 
