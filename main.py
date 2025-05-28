@@ -5,13 +5,15 @@ from matplotlib import pyplot as plt
 from pso import AWPSO
 from coa import COA
 from ga import MVCGA
+from wo import WO
 
 
 def main():
     # Algorithm
     # exper(MVCGA)
     # exper(AWPSO)
-    exper(COA)
+    # exper(COA)
+    exper(WO)
 
 
 def exper(META):
@@ -62,18 +64,18 @@ def exper(META):
         # plt.pause(2)
         # plt.close()
 
-    # Select best 
-    min_gBest = np.min(gBests)
-    candidates = np.where(gBests == min_gBest)[0]
-    best_index = candidates[np.argmin(opIts[candidates])]
+    # # Select best 
+    # min_gBest = np.min(gBests)
+    # candidates = np.where(gBests == min_gBest)[0]
+    # best_index = candidates[np.argmin(opIts[candidates])]
 
-    # Save best
-    plt.plot(allGlobalBestPerIter[best_index])
-    plt.xlabel("Iteration")
-    plt.ylabel("Global Best")
-    plt.grid(True)
-    plt.savefig(f"COA_schwefel226.png")  # Change it according to function and algorithm
-    plt.close()
+    # # Save best
+    # plt.plot(allGlobalBestPerIter[best_index])
+    # plt.xlabel("Iteration")
+    # plt.ylabel("Global Best")
+    # plt.grid(True)
+    # plt.savefig(f"COA_schwefel226.png")  # Change it according to function and algorithm
+    # plt.close()
 
     # Show the statistics
     print(f"\nSuccess rate = {success} / {nExp} = {success / nExp * 100:.2f} %\n")
