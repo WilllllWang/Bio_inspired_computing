@@ -54,15 +54,15 @@ def exper(META):
         print(f"Experiment {i+1}, Best: {globalBest}, Iteration when optimum found: {opIts[i]}, time (s): {time.time()-t:.2f}")
         t = time.time()
 
-        # # Optional
-        # plt.plot(globalBestPerIter)
-        # plt.xlabel("Iteration")
-        # plt.ylabel("Average Global Best")
-        # plt.title(f"Convergence Curve Exp {i+1}")
-        # plt.grid(True)
-        # plt.show(block=False)
-        # plt.pause(2)
-        # plt.close()
+        # Optional
+        plt.plot(globalBestPerIter)
+        plt.xlabel("Iteration")
+        plt.ylabel("Average Global Best")
+        plt.title(f"Convergence Curve Exp {i+1}")
+        plt.grid(True)
+        plt.show(block=False)
+        plt.pause(2)
+        plt.close()
 
     # # Select best 
     # min_gBest = np.min(gBests)
