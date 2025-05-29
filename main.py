@@ -19,17 +19,17 @@ def main():
 def exper(META):
     d = 6                           # Problem dimension
 
-    # FOBJ = rastrigin                # Function
-    # lu = np.zeros((2, d))           # Boundaries
-    # lu[0, :] = -5.12                # Lower boundaries
-    # lu[1, :] = 5.12                 # Upper boundaries
-    # target = 0.0                    # Global Optimum
-
-    FOBJ = schwefel_226             # Function
+    FOBJ = rastrigin                # Function
     lu = np.zeros((2, d))           # Boundaries
-    lu[0, :] = -500                 # Lower boundaries
-    lu[1, :] = 500                  # Upper boundaries
+    lu[0, :] = -5.12                # Lower boundaries
+    lu[1, :] = 5.12                 # Upper boundaries
     target = 0.0                    # Global Optimum
+
+    # FOBJ = schwefel_226             # Function
+    # lu = np.zeros((2, d))           # Boundaries
+    # lu[0, :] = -500                 # Lower boundaries
+    # lu[1, :] = 500                  # Upper boundaries
+    # target = 0.0                    # Global Optimum
 
     # Experimental variables
     iterMax = 5000                  # Number of iterations
@@ -41,7 +41,11 @@ def exper(META):
     success = 0
 
     for i in range(nExp):
-        globalBest, globalBestParams, globalBestPerIter, optimumIter = META(lu, iterMax, FOBJ, target)
+        res = META(lu, iterMax, FOBJ, target)
+        globalBest = res[0]
+        globalBestParams = res[1]
+        globalBestPerIter = res[2]
+        optimumIter = res[3] 
         gBests[i] = globalBest
         if optimumIter > -1:
             opIts[i] = optimumIter
@@ -55,14 +59,18 @@ def exper(META):
         t = time.time()
 
         # Optional
+        fig = plt.figure()
+        manager = plt.get_current_fig_manager()
+        manager.window.state('zoomed')
+        
         plt.plot(globalBestPerIter)
         plt.xlabel("Iteration")
-        plt.ylabel("Average Global Best")
-        plt.title(f"Convergence Curve Exp {i+1}")
+        plt.ylabel("Global Best")
+        plt.title(f"Global best = {globalBest} at iteration {opIts[i]}")
         plt.grid(True)
-        plt.show(block=False)
-        plt.pause(2)
-        plt.close()
+
+        
+
 
     # # Select best 
     # min_gBest = np.min(gBests)
